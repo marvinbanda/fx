@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>my Pairs</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background-color: #1a1a1a; /* Dark background color */
+            color: #ffffff; /* Light text color */
+            font-family: Arial, sans-serif;
+            margin: 0; /* Remove default margin for full-width background */
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: #2c2c2c; /* Darker header background color */
+        }
+
+        main {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        label, select {
+            margin-bottom: 10px;
+            color: #ffffff; /* Light text color for labels and selects */
+        }
+
+        select {
+            background-color: #ff0000; /* Red background color for the dropdowns */
+            color: #ffffff; /* Light text color for dropdown options */
+            padding: 5px; /* Add padding for better appearance */
+            border: none; /* Remove default border */
+            border-radius: 3px; /* Add border-radius for a rounded look */
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .outputBox {
+            flex: 0 0 calc(50% - 20px);
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #a81818;
+            box-sizing: border-box;
+            background-color: #2c2c2c; /* Darker container background color */
+        }
+
+        .chart-container {
+            width: 100%;
+            height: 200px;
+            background-color: #1a1a1a; /* Dark chart background color */
+        }
+
+        #reloadButton {
+            width: 100%;
+            padding: 15px;
+            background-color: #4CAF50; /* Green background color for the button */
+            color: #ffffff; /* Light text color for the button */
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Forex Trading Pairs</h1>
+    </header>
+
+    <main>
+        <div>
+            <label for="pairSelector">Select Forex Pair:</label>
+            <select id="pairSelector" onchange="updateChart()">
+                <option value="EURUSD">EUR/USD</option>
+                <option value="USDJPY">USD/JPY</option>
+                <option value="EURUSD">EUR/USD</option>
+                <option value="USDJPY">USD/JPY</option>
+                <!-- Add more trading pairs as needed -->
+            </select>
+        </div>
+
+        <div>
+            <label for="timeFrameSelector">Select Time Frame:</label>
+            <select id="timeFrameSelector" onchange="updateChart()">
+                <option value="minutely">Minutely</option>
+                <option value="hourly">Hourly</option>
+                <option value="daily">Daily</option>
+                <option value="weekly">Weekly</option>
+            </select>
+        </div>
+
+
+
+        <div>
+            <label for="pairSelector">Select Forex Pair:</label>
+            <select id="pairSelector" onchange="updateChart()">
+                <option value="EURUSD">EUR/USD</option>
+                <option value="USDJPY">USD/JPY</option>
+                <!-- Add more trading pairs as needed -->
+            </select>
+        </div>
+
+        <div>
+            <label for="timeFrameSelector">Select Time Frame:</label>
+            <select id="timeFrameSelector" onchange="updateChart()">
+                <option value="minutely">Minutely</option>
+                <option value="hourly">Hourly</option>
+                <option value="daily">Daily</option>
+                <option value="weekly">Weekly</option>
+            </select>
+        </div>
+
+        <table>
+            <!-- Your existing table structure remains unchanged -->
+        </table>
+
+        <div class="outputBox">
+            <strong>Trend:</strong> Up<br>
+            <strong>Duration:</strong> 3 hours
+            <div class="chart-container">
+                <canvas id="outputChartEURUSD"></canvas>
+                
+            </div>
+            <button onclick="myFunction()">buy me</button>
+            <button onclick="myFunction()">sell me</button>
+        </div>
+
+        <div class="outputBox">
+            <strong>Trend:</strong> Down<br>
+            <strong>Duration:</strong> 1 week
+            <div class="chart-container">
+                <canvas id="outputChartUSDJPY"></canvas>
+            </div>
+            <button onclick="myFunction()">buy me</button>
+            <button onclick="myFunction()">sell me</button>
+        </div>
+
+        <button id="reloadButton" onclick="reloadPredictions()">Predictions</button>
+        <button id="reloadButton" onclick="reloadPredictions()">calculations</button>
+        <button id="reloadButton" onclick="reloadPredictions()">balance</button>
+    </main>
+
+    <script>
+        // Dummy data for the charts
+        const dummyDataEURUSD = {
+            labels: ["1", "2", "3", "4", "5"],
+            datasets: [
+                {
+                    label: "Dummy Data",
+                    data: [10, 25, 15, 30, 20],
+                    borderColor: "#ffffff",
+                    backgroundColor: "rgba(255, 255, 255, 0.2)",
+                },
+            ],
+        };
+
+        const dummyDataUSDJPY = {
+            labels: ["1", "2", "3", "4", "5"],
+            datasets: [
+                {
+                    label: "Dummy Data",
+                    data: [20, 15, 30, 25, 10],
+                    borderColor: "#ffffff",
+                    backgroundColor: "rgba(255, 255, 255, 0.2)",
+                },
+            ],
+        };
+
+        // Function to update the chart based on the selected pair
+        function updateChart() {
+            // Implement your chart update logic here
+        }
+
+        // Function to reload predictions
+        function reloadPredictions() {
+            // Implement your prediction reload logic here
+            alert("Reloading Predictions...");
+        }
+
+        // Initialize charts with dummy data
+        const ctxEURUSD = document.getElementById("outputChartEURUSD").getContext("2d");
+        new Chart(ctxEURUSD, {
+            type: "line",
+            data: dummyDataEURUSD,
+        });
+
+        const ctxUSDJPY = document.getElementById("outputChartUSDJPY").getContext("2d");
+        new Chart(ctxUSDJPY, {
+            type: "line",
+            data: dummyDataUSDJPY,
+        });
+    </script>
+
+
+
+
+
+
+
+
+<script>
+  function myFunction() {
+    alert("Button clicked!");
+  }
+</script>
+
+
+
+</body>
+</html>
